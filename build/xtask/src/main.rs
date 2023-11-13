@@ -270,7 +270,6 @@ fn run(xtask: Xtask) -> Result<()> {
             let toml = Config::from_file(&args.cfg)?;
             let chip = ["-c", crate::flash::chip_name(&toml.board)?];
             args.extra_options.push("--force".to_string());
-
             let image_name = if let Some(ref name) = args.image_name {
                 if !toml.check_image_name(name) {
                     bail!("Image name {} not declared in TOML", name);
@@ -279,7 +278,6 @@ fn run(xtask: Xtask) -> Result<()> {
             } else {
                 &toml.image_names[0]
             };
-
             humility::run(&args, &chip, Some("flash"), false, image_name)?;
         }
         Xtask::Sizes {

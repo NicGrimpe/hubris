@@ -49,7 +49,8 @@ fn main() -> ! {
 
     let mut response = [0; 16];
     loop {
-        uart_send(b"Ping!\r\n");
+        uart_send(b"Ping nic!\r\n");
+        hl::sleep_for(2000);
 
         let (code, _len) =
             sys_send(peer, PING_OP, b"hello", &mut response, &[]);

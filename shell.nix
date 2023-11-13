@@ -1,11 +1,17 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {} , nicpkgs ? import <nicpkgs> {} }:
   pkgs.mkShell rec {
-    buildInputs = with pkgs; [
-      clang
-      llvmPackages_9.bintools
-      llvmPackages_9.stdenv
-      rustup
-      cargo-binutils
+    nativeBuildInputs = [ pkgs.pkg-config ];
+
+    buildInputs = [
+      pkgs.clang
+      pkgs.llvmPackages_9.bintools
+      pkgs.llvmPackages_9.stdenv
+      pkgs.rustup
+      pkgs.cargo-binutils
+      pkgs.openocd
+      pkgs.libusb1
+      pkgs.libftdi1
+      nicpkgs.humility
     ];
 
     RUSTC_VERSION = pkgs.lib.readFile ./rust-toolchain.toml;
