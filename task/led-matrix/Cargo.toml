@@ -1,0 +1,19 @@
+[package]
+name = "task-led-matrix"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cortex-m = { workspace = true }
+userlib = { path = "../../sys/userlib", features = ["panic-messages"] }
+
+[features]
+uart = []
+
+# This section is here to discourage RLS/rust-analyzer from doing test builds,
+# since test builds don't work for cross compilation.
+[[bin]]
+name = "task-led-matrix"
+test = false
+doctest = false
+bench = false
